@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+use_frameworks!
+
+target 'Weather实战' do
+pod 'Alamofire', '~> 3.4'
+pod 'SwiftyJSON'
+pod 'ObjectMapper', '~> 1.3'
+pod 'MBProgressHUD', '~> 1.0.0'
+pod 'AFNetworking', '~> 3.0'
+pod 'RealmSwift' 
+end

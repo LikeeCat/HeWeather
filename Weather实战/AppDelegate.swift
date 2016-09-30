@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import RealmSwift
+let realm = try! Realm()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,6 +17,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIView.appearance().tintColor = UIColor.whiteColor()
+      
+
+            Realm.Configuration.defaultConfiguration = Realm.Configuration(
+                schemaVersion: 2,
+                migrationBlock: { migration, oldSchemaVersion in
+                    // The enumerateObjects:block: method iterates
+                    // over every 'Person' object stored in the Realm file
+                    migration.enumerate(CityRealm.className()) { oldObject, newObject in
+                        // Add the `fullName` property only to Realms with a schema version of 0
+                        if oldSchemaVersion < 1 {
+                            
+                            newObject!["pinYin"] = ""
+                            newObject!["firstLetter"] = ""
+                        }
+                        
+                        
+                    }
+            })
+        
+        
+  
+       
         return true
     }
 
