@@ -10,6 +10,9 @@ import UIKit
 import RealmSwift
 class AddCityViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
     var cityArray = [CityRealm]()
+    var customRealmArray = [CustomCityList]()
+    
+    var citySelect:CityRealm!
     @IBOutlet weak var TableView: UITableView!
     
    
@@ -35,8 +38,10 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
     //MARK: - Config Realm For UI
     func configCustomCityList(){
         let allCity = realm.objects(CustomCityList)
+        
         for city in allCity{
             cityArray.append(city.city)
+            customRealmArray.append(city)
         }
     }
     
@@ -87,8 +92,34 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
     }
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-    }
+        if  editingStyle == UITableViewCellEditingStyle.Delete{
+        
+          let deleteObject = customRealmArray[indexPath.row]
+            
+            print(deleteObject.city.cityName)
+       print(indexPath.row)
+            try! realm.write
+                {
+               realm.delete(deleteObject)
 
+                }
+            cityArray.removeAtIndex(indexPath.row)
+            customRealmArray.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Middle)
+            tableView.reloadData()
+        }
+    }
+    //MARK: - Table View Selected
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.citySelect = cityArray[indexPath.row]
+         self.performSegueWithIdentifier("backHome", sender: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "backHome" {
+            
+        }
+    }
     @IBAction func back(unwindSegue: UIStoryboardSegue) {
     
     }

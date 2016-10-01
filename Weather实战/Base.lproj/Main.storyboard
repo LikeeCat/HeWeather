@@ -57,7 +57,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nei-e1-aRk">
                                         <rect key="frame" x="0.0" y="0.0" width="78" height="71"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mp1-FK-oVL">
+                                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mp1-FK-oVL">
                                                 <rect key="frame" x="0.0" y="0.0" width="78" height="57"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oli-SX-Go3">
@@ -139,6 +139,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" red="0.46096960390000002" green="1" blue="0.95609873040000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="71" id="VYu-a7-IZu"/>
                                 </constraints>
@@ -311,15 +312,15 @@
                                     <barButtonItem image="Setting 3" width="53" style="done" id="9lS-QW-juC">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="cl3-yz-3Bo" kind="show" identifier="showList" id="bRe-X6-9Ik"/>
+                                            <segue destination="cl3-yz-3Bo" kind="show" identifier="" id="bRe-X6-9Ik"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="12" style="plain" systemItem="fixedSpace" id="LMo-eB-EPO"/>
                                 </items>
-                                <color key="barTintColor" red="0.46096960390000002" green="1" blue="0.95609873040000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="1" green="0.98143117897947652" blue="0.99048694496204315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" red="0.46096960385178887" green="1" blue="0.95609873044796867" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.92176490290288704" green="0.83394686891823433" blue="1" alpha="0.2323148544520548" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="I8E-X0-ie9" firstAttribute="leading" secondItem="QMs-cL-TRA" secondAttribute="leadingMargin" id="17F-VH-K2c"/>
                             <constraint firstItem="oev-R9-TFB" firstAttribute="top" secondItem="4Db-O2-hv8" secondAttribute="bottom" constant="20" id="Ae1-tn-wDN"/>
@@ -368,7 +369,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bsq-2m-dru" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5095" y="-1621"/>
+            <point key="canvasLocation" x="-5101" y="-1641"/>
         </scene>
         <!--Add City View Controller-->
         <scene sceneID="zyb-sS-Q7j">
@@ -447,6 +448,7 @@
                                             <outlet property="location" destination="7VK-8u-eta" id="5Qu-cJ-mUZ"/>
                                             <outlet property="temp" destination="4wJ-JA-E9N" id="kNa-pT-Cce"/>
                                             <outlet property="time" destination="LQi-ty-eoy" id="MYy-hk-BAX"/>
+                                            <segue destination="a1k-vC-KwH" kind="unwind" identifier="backHome" trigger="accessoryAction" unwindAction="unwindToHome:" id="ksU-KS-Cav"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCell" rowHeight="100" id="xdP-QV-dFZ" customClass="AddCityCell" customModule="Weather实战" customModuleProvider="target">
@@ -511,6 +513,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DC5-PQ-vMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="a1k-vC-KwH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-4339" y="-1621"/>
         </scene>
@@ -567,34 +570,6 @@
                 <exit id="b2f-8j-IP1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-2826" y="-1621"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="lzg-CQ-HAC">
-            <objects>
-                <tableViewController id="Kzh-3O-tei" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KHg-0a-Mpe">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="btN-fi-r3u">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="btN-fi-r3u" id="T3G-gh-nyt">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Kzh-3O-tei" id="uvh-0q-K3N"/>
-                            <outlet property="delegate" destination="Kzh-3O-tei" id="CpK-jC-7Vv"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t9h-0T-NoV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2893" y="-1478"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hUT-z7-ecJ">

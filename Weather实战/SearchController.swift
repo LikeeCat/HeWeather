@@ -4,7 +4,7 @@
 //
 //  Created by 樊树康 on 16/9/17.
 //  Copyright © 2016年 懒懒的猫鼬鼠. All rights reserved.
-//
+// hello i want to test the git!
 import RealmSwift
 import UIKit
 
@@ -24,18 +24,8 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
    
     override func viewDidLoad() {
         super.viewDidLoad()
-   print("view did load")
-        sc = UISearchController(searchResultsController: nil)
-        self.tableView.tableHeaderView = self.sc.searchBar
-        sc.searchResultsUpdater = self;
-        sc.dimsBackgroundDuringPresentation = false
-        self.realmOperation()
-        self.setIndexArray()
-        sc.searchBar.sizeToFit()
-        sc.hidesNavigationBarDuringPresentation = false
-        self.tableView.reloadData()
-       sc.searchBar.barTintColor = UIColor.clearColor()
-        self.tableView.sectionIndexColor = UIColor.clearColor()
+        setUI()
+       
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -43,7 +33,9 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     }
     
     override func viewDidAppear(animated: Bool) {
-        
+        self.realmOperation()
+        self.setIndexArray()
+        self.tableView.reloadData()
     }
     
     
@@ -63,6 +55,21 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         }
        
     }
+    
+    func setUI(){
+        
+        //search config
+        sc = UISearchController(searchResultsController: nil)
+        sc.searchResultsUpdater = self;
+        sc.dimsBackgroundDuringPresentation = false
+        sc.loadViewIfNeeded()
+        sc.hidesNavigationBarDuringPresentation = false
+        sc.searchBar.barTintColor = UIColor.clearColor()
+        //tableView config
+        self.tableView.tableHeaderView = self.sc.searchBar
+        self.tableView.sectionIndexColor = UIColor.blackColor()
+        self.tableView.sectionIndexBackgroundColor = UIColor.clearColor()
+    }
     //MARK: - Table View DataSource
 
     
@@ -79,7 +86,6 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         var send = 0
          if sc.active
          {
-            tableView.reloadSectionIndexTitles()
             return searchCityList.count
          }
          else
@@ -93,7 +99,6 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
             {
             send = secationArrayIndex[section + 1]
             }
-        //print(" now is \(send - sstart)")
         return send - sstart
         }
 
@@ -131,14 +136,14 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         self.tableView.reloadData()
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-     var  addCity = CityList[secationArrayIndex[indexPath.section] + indexPath.row]
+        
+        var  addCity = CityList[secationArrayIndex[indexPath.section] + indexPath.row]
         
         let list = CustomCityList()
         list.city = addCity
         try! realm.write{
               realm.add(list)
            }
-        
     
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
@@ -156,7 +161,6 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
                 var index = CityList.indexOf(city)
                 indexArray.append(index!)
                 
-              //  print("\(city.firstLetter) : \(index)")
             }
         }
       

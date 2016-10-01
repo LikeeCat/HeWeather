@@ -81,13 +81,18 @@ class locationViewController: UIViewController,UITableViewDataSource {
     
     //MARK: - Realm DataBase
    
+    
+    func getInformation(str:String){
+       NetWorkHelper.netWorkHelper.fetch(str)
+       { (succeed, responseValue) in
+       self.weekWeather = succeed
+       self.tmpNow = responseValue["HeWeather data service 3.0"][0]["now"]["tmp"].stringValue
+       self.suggest = responseValue["HeWeather data service 3.0"][0]["suggestion"]["comf"]["txt"].stringValue
+        }
+    }
     func initializeRealmDataBase() {
         
-        NetWorkHelper.netWorkHelper.fetch("CN101010100") { (succeed, responseValue) in
-            self.weekWeather = succeed
-            self.tmpNow = responseValue["HeWeather data service 3.0"][0]["now"]["tmp"].stringValue
-            self.suggest = responseValue["HeWeather data service 3.0"][0]["suggestion"]["comf"]["txt"].stringValue
-        }
+        getInformation("CN101010100")
         
         let allcity = realm.objects(CityRealm)
         if allcity.count == 0
@@ -151,39 +156,45 @@ class locationViewController: UIViewController,UITableViewDataSource {
         let image = UIImage.getImageFromInternet(person.WeatherImageBaseURL+URL)
         return image
     }
-    func setWeatherImage(){
+    func setWeatherImage()
+    {
         var paramter = [String]()
-        for weather in weekWeather{
+        for weather in weekWeather
+        {
             let param = weather.cond?.code_d
             paramter.append(param!)
         }
          var URL = [String]()
-            for par in paramter {
+            for par in paramter
+            {
              let url = person.WeatherImageBaseURL + par + person.WeatherImageTail
                 URL.append(url)
             }
-        var i = 0
-          UIImageViewData.map { imageData in
+         var i = 0
+          UIImageViewData.map
+        { imageData in
 
             imageData.image = UIImage.getImageFromInternet(URL[i])
              i += 1
-            while(i == UILabelData.count){
+            while(i == UILabelData.count)
+            {
                 i = 0
             }
         }
-        UILabelData.map { label in
+        UILabelData.map
+            { label in
     
             label.text = weekWeather[i].cond?.txt_n
       
              i += 1
-        }
+            }
 
 
         
     }
     
-    func setNowWeather()  {
-      //  self.NowWeatherTmp.text = weekWeather[0].tmp?.max
+    func setNowWeather()
+    {
         let max = weekWeather[0].tmp?.max
         print(max, terminator: "")
        
@@ -196,7 +207,7 @@ class locationViewController: UIViewController,UITableViewDataSource {
     }
     
     func mapWeatherInformation(){
-     let todayInformationInArray = weekWeather[0]
+         let todayInformationInArray = weekWeather[0]
 
          self.todayInformation.pcpn  = todayInformationInArray.pcpn
          self.todayInformation.sr  = (todayInformationInArray.astro?.sr)!
@@ -288,6 +299,18 @@ class locationViewController: UIViewController,UITableViewDataSource {
         UIImageViewData = [self.Weather0Image,self.Weather1Image,self.Weather2Image,self.Weather3Image,self.Weather4Image,self.Weather5Image]
         UILabelData = [self.weather0Lable,self.weather1Lable,self.weather2Lable,self.weather3Lable,self.weather4Lable,self.weather5Lable]
 
+    }
+    
+        
+   @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
+        if unwindSegue.identifier == "backHome"
+        {
+            let SVC = unwindSegue.sourceViewController as!AddCityViewController
+            let selectCity = SVC.citySelect
+            print(selectCity.cityName)
+            getInformation(selectCity.id)
+            self.location.text = selectCity.cityName
+              }
     }
 
 }
