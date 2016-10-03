@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="T4x-WH-8ev">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="liH-x8-HGB">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,10 +8,18 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Page View Controller-->
+        <scene sceneID="J5R-jQ-Mhg">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="liH-x8-HGB" customClass="PageViewController" customModule="Weather实战" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DGe-pg-Rwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5736" y="-1641"/>
+        </scene>
         <!--Location View Controller-->
         <scene sceneID="wlA-01-nf3">
             <objects>
-                <viewController id="T4x-WH-8ev" customClass="locationViewController" customModule="Weather实战" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GuiderContentController" id="T4x-WH-8ev" customClass="locationViewController" customModule="Weather实战" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r5b-fa-pqP"/>
                         <viewControllerLayoutGuide type="bottom" id="M46-Pq-VCV"/>
@@ -317,10 +325,10 @@
                                     </barButtonItem>
                                     <barButtonItem width="12" style="plain" systemItem="fixedSpace" id="LMo-eB-EPO"/>
                                 </items>
-                                <color key="barTintColor" red="1" green="0.98143117897947652" blue="0.99048694496204315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.46096960390000002" green="1" blue="0.95609873040000004" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" red="0.92176490290288704" green="0.83394686891823433" blue="1" alpha="0.2323148544520548" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.46096960390000002" green="1" blue="0.95609873040000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="I8E-X0-ie9" firstAttribute="leading" secondItem="QMs-cL-TRA" secondAttribute="leadingMargin" id="17F-VH-K2c"/>
                             <constraint firstItem="oev-R9-TFB" firstAttribute="top" secondItem="4Db-O2-hv8" secondAttribute="bottom" constant="20" id="Ae1-tn-wDN"/>
@@ -448,7 +456,7 @@
                                             <outlet property="location" destination="7VK-8u-eta" id="5Qu-cJ-mUZ"/>
                                             <outlet property="temp" destination="4wJ-JA-E9N" id="kNa-pT-Cce"/>
                                             <outlet property="time" destination="LQi-ty-eoy" id="MYy-hk-BAX"/>
-                                            <segue destination="a1k-vC-KwH" kind="unwind" identifier="backHome" trigger="accessoryAction" unwindAction="unwindToHome:" id="ksU-KS-Cav"/>
+                                            <segue destination="a1k-vC-KwH" kind="unwind" identifier="backHome" trigger="accessoryAction" unwindAction="unwindToHome:" id="AQr-4B-cwL"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCell" rowHeight="100" id="xdP-QV-dFZ" customClass="AddCityCell" customModule="Weather实战" customModuleProvider="target">
@@ -521,10 +529,10 @@
         <scene sceneID="aEv-jC-AEp">
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="NwP-6u-QGE" customClass="SearchController" customModule="Weather实战" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="50" sectionFooterHeight="28" id="3h0-SL-DFr">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="3h0-SL-DFr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.67747145769999995" green="0.90260301470000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.46096960390000002" green="1" blue="0.95609873040000004" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CityListCell" textLabel="OPY-y6-0qf" detailTextLabel="kqV-Lc-qQ7" style="IBUITableViewCellStyleSubtitle" id="ZfX-S9-VYk">
                                 <rect key="frame" x="0.0" y="114" width="600" height="44"/>
@@ -549,7 +557,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.67747145769999995" green="0.90260301470000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.46096960390000002" green="1" blue="0.95609873040000004" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -561,7 +569,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Done" id="aNq-hg-YHS">
                             <connections>
                                 <action selector="dismiss:" destination="NwP-6u-QGE" id="F8W-Py-52c"/>
-                                <segue destination="b2f-8j-IP1" kind="unwind" identifier="back" unwindAction="back:" id="rl4-zp-Y7l"/>
+                                <segue destination="b2f-8j-IP1" kind="unwind" identifier="back" unwindAction="back:" id="kww-1h-pH1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -579,7 +587,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="aLu-6B-u6b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.67747145769999995" green="0.90260301470000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.46096960390000002" green="1" blue="0.95609873040000004" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

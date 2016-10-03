@@ -29,7 +29,7 @@ struct TodayInformation{
    
     var vis :String = " "
    
-       static let rows = 5
+    static let rows = 5
     static let weatherInformationkeyArray = ["日出","日落","降水概率","降水量","湿度","风速","风力等级","风向","气压","能见度"]
 }
 

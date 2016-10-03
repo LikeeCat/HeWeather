@@ -22,41 +22,45 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     
     //MARK:  - ViewController Life
    
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         setUI()
        
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
         self.realmOperation()
         self.setIndexArray()
         self.tableView.reloadData()
     }
     
-    
-    @IBAction func dismiss(sender: AnyObject) {
+    //MARK : - Back Button
+    @IBAction func dismiss(sender: AnyObject)
+    {
         
         self.performSegueWithIdentifier("back", sender: sender)
     }
+    
     //MARK: - Realm Operation
    
-    func realmOperation(){
+    func realmOperation()
+    {
      
         let allCity = realm.objects(CityRealm).sorted("pinYin")
     
-        for city in allCity{
+        for city in allCity
+        {
             CityList.append(city)
             
         }
        
     }
     
-    func setUI(){
+    func setUI()
+    {
         
         //search config
         sc = UISearchController(searchResultsController: nil)
@@ -64,53 +68,61 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         sc.dimsBackgroundDuringPresentation = false
         sc.loadViewIfNeeded()
         sc.hidesNavigationBarDuringPresentation = false
-        sc.searchBar.barTintColor = UIColor.clearColor()
+        sc.searchBar.barTintColor = UIColor(colorLiteralRed: 118/255.0, green: 255/255.0, blue: 244/255.0, alpha: 0.9)
         //tableView config
         self.tableView.tableHeaderView = self.sc.searchBar
-        self.tableView.sectionIndexColor = UIColor.blackColor()
+        self.tableView.sectionIndexColor = UIColor.whiteColor()
         self.tableView.sectionIndexBackgroundColor = UIColor.clearColor()
     }
+    
     //MARK: - Table View DataSource
-
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if sc.active{
-            return 1
-        }else{
-        return indexingArray.count
-        }
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var sstart = secationArrayIndex[section]
-        var send = 0
-         if sc.active
-         {
-            return searchCityList.count
-         }
-         else
-         {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+       
+        return  sc.active ? 1 : indexingArray.count
         
-            if(section == secationArrayIndex.count - 1)
-            {
-            send = CityList.count
-            }
-            else
-            {
-            send = secationArrayIndex[section + 1]
-            }
-        return send - sstart
-        }
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        let sstart = secationArrayIndex[section]
+//       var send = 0
+//         if sc.active
+//         {
+//           return searchCityList.count
+//         }
+//         else
+//         {
+//
+//            if(section == secationArrayIndex.count - 1)
+//            {
+//            send = CityList.count
+//            }
+//                
+//            else
+//            {
+//            send = secationArrayIndex[section + 1]
+//            }
+        
+        
+        return   sc.active ?
+        searchCityList.count : section == secationArrayIndex.count - 1 ?
+            CityList.count - sstart :secationArrayIndex[section + 1] - sstart
+        
 
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier("CityListCell", forIndexPath: indexPath)
-        if sc.active{
+        if sc.active
+        {
             
             cell.textLabel?.text = searchCityList[indexPath.row].cityName
             cell.detailTextLabel?.text = searchCityList[indexPath.row].prov
         }
-        else{
+        else
+        {
             
             cell.textLabel?.text = CityList[secationArrayIndex[indexPath.section] + indexPath.row].cityName
             cell.detailTextLabel?.text = CityList[secationArrayIndex[indexPath.section] + indexPath.row].prov
@@ -122,11 +134,14 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     
  
     //MARK: - Search Result Updating
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResultsForSearchController(searchController: UISearchController)
+    {
         var temp = [CityRealm]()
         
-        for city in CityList{
-            if (city.cityName.containsString(searchController.searchBar.text!) || city.prov.containsString(searchController.searchBar.text!) ) {
+        for city in CityList
+        {
+            if (city.cityName.containsString(searchController.searchBar.text!) || city.prov.containsString(searchController.searchBar.text!) )
+            {
                 temp.append(city)
             }
             
@@ -135,13 +150,15 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         self.searchCityList = temp
         self.tableView.reloadData()
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
         
-        var  addCity = CityList[secationArrayIndex[indexPath.section] + indexPath.row]
+        let  addCity = CityList[secationArrayIndex[indexPath.section] + indexPath.row]
         
         let list = CustomCityList()
         list.city = addCity
-        try! realm.write{
+        try! realm.write
+            {
               realm.add(list)
            }
     
@@ -151,14 +168,17 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
    
      // MARK: - Set TableView Indexing
     
-    func setIndexArray() {
+    func setIndexArray()
+    {
         
         var array = [String]()
         var indexArray = [Int]()
-        for city in CityList{
-            if( array.contains(city.firstLetter) == false){
+        for city in CityList
+        {
+            if( array.contains(city.firstLetter) == false)
+            {
                 array.append(city.firstLetter)
-                var index = CityList.indexOf(city)
+                let index = CityList.indexOf(city)
                 indexArray.append(index!)
                 
             }
@@ -170,38 +190,23 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     }
     
    
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-    print("search title \(indexingArray.count)")
-        for arr in indexingArray{
-            print(arr)
-        }
-        if sc.active{
-            return nil
-        }else{
-        return indexingArray
-        }
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]?
+    {
+
+       return   sc.active ?   nil :  indexingArray
+        
     }
         
-       
-        
     
-    
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int
+    {
         return index
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
         
         return indexingArray[section]
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+ 
 }

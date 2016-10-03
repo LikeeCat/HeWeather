@@ -31,53 +31,57 @@ class locationViewController: UIViewController,UITableViewDataSource {
     @IBOutlet weak var Weather5Image: UIImageView!
     
     @IBOutlet weak var weather0Lable: UILabel!
-
     @IBOutlet weak var weather1Lable: UILabel!
-    
     @IBOutlet weak var weather2Lable: UILabel!
-    
     @IBOutlet weak var weather3Lable: UILabel!
-    
-    
     @IBOutlet weak var weather4Lable: UILabel!
-    
     @IBOutlet weak var weather5Lable: UILabel!
     
     //MARK: UI Control
     @IBOutlet weak var Spinner: UIActivityIndicatorView!
-    
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var tableview: UITableView!
+    //MARK: Page View Controller Property
+    
+    var index = 0 
+    
     //MARK: weekWeather Property Observers
 
     var UIImageViewData = [UIImageView]()
     var UILabelData = [UILabel]()
    
-    var weekWeather = [Daily](){
-        didSet{
+    var weekWeather = [Daily]()
+    {
+        didSet
+        {
             self.setNowWeather()
             self.mapWeatherInformation()
         }
     }
     var suggest = ""
-        {
-        didSet{
+    {
+           didSet
+           {
             self.tableview.reloadData()
-        }
-}
-    var tmpNow = "10"
+           }
+    }
+    var tmpNow = "0°"
+    {
+        didSet
         {
-        didSet{
             self.NowWeatherTmp.text = tmpNow
         }
     }
  
     var todayInformation = TodayInformation()
+    {
+        didSet
         {
-        didSet{
             self.tableview.reloadData()
         }
     }
+    var cityIdDefult = "CN101010100"
+    var cityName = "北京"
     
     //MARK: - Realm DataBase
    
@@ -90,22 +94,19 @@ class locationViewController: UIViewController,UITableViewDataSource {
        self.suggest = responseValue["HeWeather data service 3.0"][0]["suggestion"]["comf"]["txt"].stringValue
         }
     }
+    
     func initializeRealmDataBase() {
         
-        getInformation("CN101010100")
-        
+        getInformation(cityIdDefult)
         let allcity = realm.objects(CityRealm)
         if allcity.count == 0
         {
             NetWorkHelper.netWorkHelper.fetchAllCity("allchina")
             { (succeed, _) in
-                
                 try! realm.write
                     {
                     realm.add(succeed)
                     }
-                
-                
             }
         }
         
@@ -114,12 +115,12 @@ class locationViewController: UIViewController,UITableViewDataSource {
     //MARK: ViewController life
     override func viewDidLoad() {
         super.viewDidLoad()
-      print(path)
+         print(path)
         self.initializeRealmDataBase()
-
-        self.Spinner.startAnimating()
-        self.location.text = "正在解析当前地址,请稍侯"
-        self.MapJSONAnalyze()
+       self.location.text = cityName
+        //self.Spinner.startAnimating()
+       // self.location.text = "正在解析当前地址,请稍侯"
+       // self.MapJSONAnalyze()
         
         self.managerImageAndLabel()
         self.tableview.estimatedRowHeight = 80
@@ -128,11 +129,7 @@ class locationViewController: UIViewController,UITableViewDataSource {
         
         
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     //MARK: MapJSONAnalyze
     func MapJSONAnalyze()  {
         let a = AFNetHelper()
@@ -152,10 +149,13 @@ class locationViewController: UIViewController,UITableViewDataSource {
 
     }
     //MARK: Set UI Function
-    func getWeatherImage(URL:String) ->UIImage{
+    func getWeatherImage(URL:String) ->UIImage
+    {
         let image = UIImage.getImageFromInternet(person.WeatherImageBaseURL+URL)
         return image
     }
+    
+    
     func setWeatherImage()
     {
         var paramter = [String]()
@@ -164,15 +164,18 @@ class locationViewController: UIViewController,UITableViewDataSource {
             let param = weather.cond?.code_d
             paramter.append(param!)
         }
-         var URL = [String]()
-            for par in paramter
-            {
-             let url = person.WeatherImageBaseURL + par + person.WeatherImageTail
-                URL.append(url)
-            }
-         var i = 0
-          UIImageViewData.map
-        { imageData in
+        var URL = [String]()
+        for par in paramter
+        {
+            let url = person.WeatherImageBaseURL + par + person.WeatherImageTail
+            URL.append(url)
+        }
+        
+        var i = 0
+        
+        UIImageViewData.map
+        {
+            imageData in
 
             imageData.image = UIImage.getImageFromInternet(URL[i])
              i += 1
@@ -182,12 +185,11 @@ class locationViewController: UIViewController,UITableViewDataSource {
             }
         }
         UILabelData.map
-            { label in
-    
+        {
+            label in
             label.text = weekWeather[i].cond?.txt_n
-      
-             i += 1
-            }
+            i += 1
+        }
 
 
         
@@ -206,7 +208,8 @@ class locationViewController: UIViewController,UITableViewDataSource {
         self.NowWeatherWind.text = weekWeather[0].wind?.sc
     }
     
-    func mapWeatherInformation(){
+    func mapWeatherInformation()
+    {
          let todayInformationInArray = weekWeather[0]
 
          self.todayInformation.pcpn  = todayInformationInArray.pcpn
@@ -224,30 +227,38 @@ class locationViewController: UIViewController,UITableViewDataSource {
     
     //MARK: - Table View
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
         return 2
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
        
-        switch section {
+        switch section
+        {
         case 0:
             return 1
         default:
             return TodayInformation.rows
         }
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-       let constant = Costant()
-        if indexPath.section == 0{
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let constant = Costant()
+        if indexPath.section == 0
+        {
             
             let cell = tableView.dequeueReusableCellWithIdentifier("suggestCell", forIndexPath: indexPath) as! SuggestCell
             cell.Today.text = "今天:"
             cell.suggestInformation.text = self.suggest
             return cell
-                    }
-        else {
+            
+        }
+        else
+        {
             let cell = tableView.dequeueReusableCellWithIdentifier("informationCell", forIndexPath: indexPath) as! InformationCell
-            switch indexPath.row {
+            switch indexPath.row
+            {
             case 0:
                 cell.key .text = TodayInformation.weatherInformationkeyArray[0]+constant.tailSymbol
                 cell.value.text = todayInformation.sr
@@ -295,22 +306,12 @@ class locationViewController: UIViewController,UITableViewDataSource {
     }
     
     //MARK: - manager Image And Label
-    func managerImageAndLabel(){
+    func managerImageAndLabel()
+    {
         UIImageViewData = [self.Weather0Image,self.Weather1Image,self.Weather2Image,self.Weather3Image,self.Weather4Image,self.Weather5Image]
         UILabelData = [self.weather0Lable,self.weather1Lable,self.weather2Lable,self.weather3Lable,self.weather4Lable,self.weather5Lable]
 
     }
     
-        
-   @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
-        if unwindSegue.identifier == "backHome"
-        {
-            let SVC = unwindSegue.sourceViewController as!AddCityViewController
-            let selectCity = SVC.citySelect
-            print(selectCity.cityName)
-            getInformation(selectCity.id)
-            self.location.text = selectCity.cityName
-              }
-    }
-
+   
 }

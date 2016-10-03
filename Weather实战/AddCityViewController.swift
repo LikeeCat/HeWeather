@@ -18,43 +18,51 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
    
     //MARK: - View Controller Life
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
     
         
-         }
-    override func viewWillAppear(animated: Bool) {
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
         self.configCustomCityList()
         self.TableView.reloadData()
     }
-    override func viewDidDisappear(animated: Bool) {
+    
+    override func viewDidDisappear(animated: Bool)
+    {
+        super.viewDidDisappear(animated)
         cityArray.removeAll()
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+ 
     
     //MARK: - Config Realm For UI
-    func configCustomCityList(){
+    func configCustomCityList()
+    {
         let allCity = realm.objects(CustomCityList)
         
-        for city in allCity{
+        for city in allCity
+        {
             cityArray.append(city.city)
             customRealmArray.append(city)
         }
     }
     
-    //MARK: - Update Weather Label
     
        //MARK: - Table View Data Source
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
         return 2
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         var number = 0
-        switch section {
+        switch section
+        {
         case 0:
                number = cityArray.count
         case 1:
@@ -64,16 +72,19 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
         }
         return number
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-       
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         
-        if indexPath.section == 0 {
+        if indexPath.section == 0
+        {
             let cell = tableView.dequeueReusableCellWithIdentifier("CityList", forIndexPath: indexPath) as! locationCityCell
             cell.cellForRowInlocationCityCell(indexPath, tableView: tableView, r: cityArray)
             return cell
         }
         
-        else {
+        else
+        {
              let cell = tableView.dequeueReusableCellWithIdentifier("AddCell", forIndexPath: indexPath) as! AddCityCell
             
             cell.cellForRowInAddCityCell(indexPath, tableView: tableView)
@@ -84,46 +95,55 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
     
     
     //MARK: - Table View Delete Operation
-    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle
+    {
         return UITableViewCellEditingStyle.Delete
     }
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        if cityArray.count == 1
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
     }
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
         
-        if  editingStyle == UITableViewCellEditingStyle.Delete{
+        if  editingStyle == UITableViewCellEditingStyle.Delete
+        {
         
           let deleteObject = customRealmArray[indexPath.row]
-            
-            print(deleteObject.city.cityName)
-       print(indexPath.row)
+
             try! realm.write
-                {
+            {
                realm.delete(deleteObject)
 
-                }
+            }
+           
             cityArray.removeAtIndex(indexPath.row)
             customRealmArray.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Middle)
             tableView.reloadData()
         }
     }
+   
     //MARK: - Table View Selected
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.citySelect = cityArray[indexPath.row]
+        print(citySelect.cityName)
          self.performSegueWithIdentifier("backHome", sender: nil)
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "backHome" {
-            
-        }
+    @IBAction  func back(unwindSegue: UIStoryboardSegue)
+    {
+        
     }
-    @IBAction func back(unwindSegue: UIStoryboardSegue) {
     
-    }
-
 }
 
    

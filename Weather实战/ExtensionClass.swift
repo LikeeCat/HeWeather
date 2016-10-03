@@ -9,10 +9,12 @@
 import UIKit
 import Alamofire
 
-extension UIImage{
+extension UIImage
+{
     
    
-  static  func getImageFromInternet(url:String) -> UIImage {
+  static  func getImageFromInternet(url:String) -> UIImage
+  {
     
     let URL = NSURL(string: url)
     let data = NSData(contentsOfURL: URL!)
@@ -21,7 +23,8 @@ extension UIImage{
         return image!
     }
 }
-extension String{
+extension String
+{
     static func transfromChineseToWord(str:String) ->(pinYin:String,firstLetter:String){
        
         
@@ -44,8 +47,4 @@ extension String{
     }
 }
 
-extension Array{
-//    static func creatArrayFromAtoZ{
-//        
-//    }
-}
+

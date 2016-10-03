@@ -13,6 +13,8 @@
 		2F1520E51D87B0B600696430 /* TodayInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1520E41D87B0B600696430 /* TodayInformation.swift */; };
 		2F2818141D83C887007D4944 /* ExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2818131D83C887007D4944 /* ExtensionClass.swift */; };
 		2F2818211D840DAE007D4944 /* AFNetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2818201D840DAE007D4944 /* AFNetHelper.m */; };
+		2F2F0CF31DA260EA00662BF3 /* HeWeather.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F0CF21DA260EA00662BF3 /* HeWeather.gif */; };
+		2F43C9D41DA0A4D000510C2A /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F43C9D31DA0A4D000510C2A /* PageViewController.swift */; };
 		2F5E45661D8B90AE006ED557 /* AddCityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E45651D8B90AE006ED557 /* AddCityCell.swift */; };
 		2F5E45681D8BE708006ED557 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5E45671D8BE708006ED557 /* Assets.xcassets */; };
 		2F7092DE1D7A8B0500DDE12C /* locationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7092DD1D7A8B0500DDE12C /* locationViewController.swift */; };
@@ -37,6 +39,8 @@
 		2F28181F1D840DAE007D4944 /* AFNetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetHelper.h; sourceTree = "<group>"; };
 		2F2818201D840DAE007D4944 /* AFNetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetHelper.m; sourceTree = "<group>"; };
 		2F2818251D8413DA007D4944 /* Weather实战-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Weather实战-Bridging-Header.h"; sourceTree = "<group>"; };
+		2F2F0CF21DA260EA00662BF3 /* HeWeather.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = HeWeather.gif; sourceTree = "<group>"; };
+		2F43C9D31DA0A4D000510C2A /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		2F5E45651D8B90AE006ED557 /* AddCityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCityCell.swift; sourceTree = "<group>"; };
 		2F5E45671D8BE708006ED557 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F7092DD1D7A8B0500DDE12C /* locationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +97,14 @@
 			name = NetHelper;
 			sourceTree = "<group>";
 		};
+		2F2F0CF41DA260FA00662BF3 /* Demo GIF */ = {
+			isa = PBXGroup;
+			children = (
+				2F2F0CF21DA260EA00662BF3 /* HeWeather.gif */,
+			);
+			name = "Demo GIF";
+			sourceTree = "<group>";
+		};
 		2F7F15721D88DE4C00F6FF07 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				2FA98FE81D5B513A004F1964 /* Main.storyboard */,
+				2F43C9D31DA0A4D000510C2A /* PageViewController.swift */,
 				2FA98FED1D5B513A004F1964 /* LaunchScreen.storyboard */,
 			);
 			name = View;
@@ -148,6 +161,7 @@
 		2FA98FE11D5B513A004F1964 /* Weather实战 */ = {
 			isa = PBXGroup;
 			children = (
+				2F2F0CF41DA260FA00662BF3 /* Demo GIF */,
 				2F7F15721D88DE4C00F6FF07 /* Model */,
 				2F7F15741D88DE8000F6FF07 /* Controller */,
 				2F7F15751D88DEBE00F6FF07 /* View */,
@@ -239,6 +253,7 @@
 				2FA98FEF1D5B513A004F1964 /* LaunchScreen.storyboard in Resources */,
 				2FCF8DB31D6DDC3B00B103C5 /* PodFile in Resources */,
 				2F5E45681D8BE708006ED557 /* Assets.xcassets in Resources */,
+				2F2F0CF31DA260EA00662BF3 /* HeWeather.gif in Resources */,
 				2FA98FEA1D5B513A004F1964 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,6 +328,7 @@
 				2F5E45661D8B90AE006ED557 /* AddCityCell.swift in Sources */,
 				2F1520DF1D87ACA000696430 /* SuggestCell.swift in Sources */,
 				2F2818141D83C887007D4944 /* ExtensionClass.swift in Sources */,
+				2F43C9D41DA0A4D000510C2A /* PageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
