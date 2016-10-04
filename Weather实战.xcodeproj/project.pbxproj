@@ -13,7 +13,6 @@
 		2F1520E51D87B0B600696430 /* TodayInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1520E41D87B0B600696430 /* TodayInformation.swift */; };
 		2F2818141D83C887007D4944 /* ExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2818131D83C887007D4944 /* ExtensionClass.swift */; };
 		2F2818211D840DAE007D4944 /* AFNetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2818201D840DAE007D4944 /* AFNetHelper.m */; };
-		2F2F0CF31DA260EA00662BF3 /* HeWeather.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F0CF21DA260EA00662BF3 /* HeWeather.gif */; };
 		2F43C9D41DA0A4D000510C2A /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F43C9D31DA0A4D000510C2A /* PageViewController.swift */; };
 		2F5E45661D8B90AE006ED557 /* AddCityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E45651D8B90AE006ED557 /* AddCityCell.swift */; };
 		2F5E45681D8BE708006ED557 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5E45671D8BE708006ED557 /* Assets.xcassets */; };
@@ -39,7 +38,6 @@
 		2F28181F1D840DAE007D4944 /* AFNetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetHelper.h; sourceTree = "<group>"; };
 		2F2818201D840DAE007D4944 /* AFNetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetHelper.m; sourceTree = "<group>"; };
 		2F2818251D8413DA007D4944 /* Weather实战-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Weather实战-Bridging-Header.h"; sourceTree = "<group>"; };
-		2F2F0CF21DA260EA00662BF3 /* HeWeather.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = HeWeather.gif; sourceTree = "<group>"; };
 		2F43C9D31DA0A4D000510C2A /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		2F5E45651D8B90AE006ED557 /* AddCityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCityCell.swift; sourceTree = "<group>"; };
 		2F5E45671D8BE708006ED557 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,6 +46,7 @@
 		2F7F156E1D87F8F100F6FF07 /* AddCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 		2F7F15701D87F94900F6FF07 /* LocationCityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCityCell.swift; sourceTree = "<group>"; };
 		2F7F15761D88DF5B00F6FF07 /* CityRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityRealm.swift; sourceTree = "<group>"; };
+		2F84C4A31DA3A2DE000681AE /* HeWeather.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = HeWeather.gif; sourceTree = "<group>"; };
 		2F8B9F8D1D80ED0000A8B4A0 /* NetWorkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkHelper.swift; sourceTree = "<group>"; };
 		2FA98FDF1D5B513A004F1964 /* Weather实战.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather实战.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA98FE21D5B513A004F1964 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +76,7 @@
 		2F1520E21D87ACD600696430 /* CellModel */ = {
 			isa = PBXGroup;
 			children = (
+				2F84C4A31DA3A2DE000681AE /* HeWeather.gif */,
 				2F7F15701D87F94900F6FF07 /* LocationCityCell.swift */,
 				2F5E45651D8B90AE006ED557 /* AddCityCell.swift */,
 				2FCF8DAE1D6DCBB400B103C5 /* CustomCell.swift */,
@@ -97,14 +97,6 @@
 			name = NetHelper;
 			sourceTree = "<group>";
 		};
-		2F2F0CF41DA260FA00662BF3 /* Demo GIF */ = {
-			isa = PBXGroup;
-			children = (
-				2F2F0CF21DA260EA00662BF3 /* HeWeather.gif */,
-			);
-			name = "Demo GIF";
-			sourceTree = "<group>";
-		};
 		2F7F15721D88DE4C00F6FF07 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +114,7 @@
 		2F7F15741D88DE8000F6FF07 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2F43C9D31DA0A4D000510C2A /* PageViewController.swift */,
 				2FAC24CF1D8D15D200FDAA68 /* SearchController.swift */,
 				2F7F156E1D87F8F100F6FF07 /* AddCityViewController.swift */,
 				2F7092DD1D7A8B0500DDE12C /* locationViewController.swift */,
@@ -133,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				2FA98FE81D5B513A004F1964 /* Main.storyboard */,
-				2F43C9D31DA0A4D000510C2A /* PageViewController.swift */,
 				2FA98FED1D5B513A004F1964 /* LaunchScreen.storyboard */,
 			);
 			name = View;
@@ -161,7 +153,6 @@
 		2FA98FE11D5B513A004F1964 /* Weather实战 */ = {
 			isa = PBXGroup;
 			children = (
-				2F2F0CF41DA260FA00662BF3 /* Demo GIF */,
 				2F7F15721D88DE4C00F6FF07 /* Model */,
 				2F7F15741D88DE8000F6FF07 /* Controller */,
 				2F7F15751D88DEBE00F6FF07 /* View */,
@@ -219,11 +210,12 @@
 			attributes = {
 				LastSwiftMigration = 0730;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "懒懒的猫鼬鼠";
 				TargetAttributes = {
 					2FA98FDE1D5B513A004F1964 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -253,7 +245,6 @@
 				2FA98FEF1D5B513A004F1964 /* LaunchScreen.storyboard in Resources */,
 				2FCF8DB31D6DDC3B00B103C5 /* PodFile in Resources */,
 				2F5E45681D8BE708006ED557 /* Assets.xcassets in Resources */,
-				2F2F0CF31DA260EA00662BF3 /* HeWeather.gif in Resources */,
 				2FA98FEA1D5B513A004F1964 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,8 +359,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -414,8 +407,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -434,6 +429,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -443,6 +439,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C6212587517F235C42967829 /* Pods-Weather实战.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Weather实战/Info.plist";
@@ -451,6 +448,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Weather实战/Weather实战-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -458,6 +456,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 30E1C69FDD1168FE602C3135 /* Pods-Weather实战.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Weather实战/Info.plist";
@@ -465,6 +464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shukangfan.Weather--";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Weather实战/Weather实战-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

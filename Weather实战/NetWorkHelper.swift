@@ -46,8 +46,8 @@ class  NetWorkHelper {
     
     //MARK: SaveCity With Realm DataBase
     
-    func fetchAllCity(city:String?, clouser:(succeed:List<CityRealm>,responseValue:JSON) -> Void){
-        
+    func fetchAllCity(city:String?, clouser:(succeed:List<CityRealm>, responseValue:JSON) -> Void){
+    
         
             if let fetchCity = city {
                 
@@ -61,7 +61,7 @@ class  NetWorkHelper {
                   //  print(respon.result.value)
                     let jsonValue = JSON(respon.result.value!)
                     let jsonCity = jsonValue["city_info"].arrayValue
-                    var cityArray = List<CityRealm>()
+                    let cityArray = List<CityRealm>()
                     
                     for json in jsonCity{
                         

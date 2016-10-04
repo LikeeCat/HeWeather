@@ -5,7 +5,6 @@
 //  Created by 樊树康 on 16/9/17.
 //  Copyright © 2016年 懒懒的猫鼬鼠. All rights reserved.
 // hello i want to test the git!
-import RealmSwift
 import UIKit
 
 class SearchController: UITableViewController,UISearchResultsUpdating{
