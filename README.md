@@ -4,13 +4,18 @@
 一个接近完成版的天气预报
 ##项目要求
 ~~请使用Xcode 7.3 打开项目~~
+
 请使用Xcode 8 打开项目
+
 ~~使用语言 Swift 2.2~~
+
 使用语言 Swift 2.3
+
 本项目使用的数据库是Realm 请使用Realm Browser Version 0.103.2 (76)查看数据库文件
 
 ##一些提示
 这个项目有一些依赖的第三方库,如果你下载好了项目无法正常的运行,请手动Pod install一下
+
 ###Demo 演示
  ![image](https://github.com/xiangtaiduo/HeWeather/blob/master/Weather%E5%AE%9E%E6%88%98/Assets.xcassets/HeWeather.gif)
 
@@ -23,6 +28,7 @@
 - [x] 实现了城市的搜索功能
 - [x] 城市控制器之间的视图切换
 - [x] 现已支持iOS 10
+
 ###接下来要进行的
 - [ ] 区分早晚的返回数据,让天气预报更加的精确
 - [ ] 在通知栏添加Widget
