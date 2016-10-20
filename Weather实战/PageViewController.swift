@@ -45,24 +45,27 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
      // MARK: - PageViewController DataSource
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        var index = (viewController as! locationViewController).index
+        var index = (viewController as! WeatherViewController).index
         index += 1
         return viewControllerAtIndex(index)
     }
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        var index = (viewController as! locationViewController).index
+        var index = (viewController as! WeatherViewController).index
         index -= 1
         return viewControllerAtIndex(index)
     }
     
-    func viewControllerAtIndex(index:Int) ->locationViewController?{
+    //setDefultLocation
+  
+   
+    func viewControllerAtIndex(index:Int) ->WeatherViewController?{
         if cityList.isEmpty == true
         {
-            if let contentVC = storyboard?.instantiateViewControllerWithIdentifier("GuiderContentController") as? locationViewController
+            //let recodeResult:AMapLocationReGeocode!
+            if let contentVC = storyboard?.instantiateViewControllerWithIdentifier("GuiderContentController") as? WeatherViewController
             {
-            contentVC.cityIdDefult = "CN101010100"
-            contentVC.cityName = "北京"
-            contentVC.index = index
+       
+                contentVC.islocation = true
                 return contentVC
             
             }
@@ -72,10 +75,11 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
         {
             if case 0 ..< cityList.count = index
              {
-                if let contentVC = storyboard?.instantiateViewControllerWithIdentifier("GuiderContentController") as? locationViewController
+                if let contentVC = storyboard?.instantiateViewControllerWithIdentifier("GuiderContentController") as? WeatherViewController
                 {
-                contentVC.cityIdDefult = cityList[index].id
-                contentVC.cityName = cityList[index].cityName
+                contentVC.islocation = false
+                    contentVC.cityIdDefult = cityList[index].id
+                    contentVC.cityName = cityList[index].cityName
                     contentVC.index = index
                 return contentVC
 

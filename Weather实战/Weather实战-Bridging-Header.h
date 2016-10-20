@@ -4,3 +4,6 @@
 
 #import "AFNetHelper.h"
 #import <AFNetworking/AFNetworking.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+
+#import <AMapLocationKit/AMapLocationKit.h>

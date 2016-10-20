@@ -8,7 +8,6 @@
 import UIKit
 
 class SearchController: UITableViewController,UISearchResultsUpdating{
-    var adHeaders:[String] = ["a","b","c","d","e"]
     //MARK: - Config array
     var CityList = [CityRealm]()
     var searchCityList = [CityRealm]()
@@ -86,24 +85,6 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         let sstart = secationArrayIndex[section]
-//       var send = 0
-//         if sc.active
-//         {
-//           return searchCityList.count
-//         }
-//         else
-//         {
-//
-//            if(section == secationArrayIndex.count - 1)
-//            {
-//            send = CityList.count
-//            }
-//                
-//            else
-//            {
-//            send = secationArrayIndex[section + 1]
-//            }
-        
         
         return   sc.active ?
         searchCityList.count : section == secationArrayIndex.count - 1 ?

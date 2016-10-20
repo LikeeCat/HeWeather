@@ -101,5 +101,7 @@ struct person {
 
     static let WeatherImageBaseURL = "http://files.heweather.com/cond_icon/"
     static let WeatherImageTail = ".png"
+    
+    static let GaodeAPIKey = "284589c0cade4061ba3092fff3367b37"
 
 }

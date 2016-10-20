@@ -12,8 +12,9 @@ import ObjectMapper
 import SwiftyJSON
 import RealmSwift
 
-class locationViewController: UIViewController,UITableViewDataSource {
+class WeatherViewController: UIViewController,UITableViewDataSource {
 
+    
     let path = NSHomeDirectory()
     
     @IBOutlet weak var NowWeatherTmpMaxMin: UILabel!
@@ -80,9 +81,16 @@ class locationViewController: UIViewController,UITableViewDataSource {
             self.tableview.reloadData()
         }
     }
-    var cityIdDefult = "CN101010100"
-    var cityName = "北京"
+    var cityIdDefult:String!{
+        didSet{
+
+        getInformation(cityIdDefult)
+        }
+    }
+ 
+    var cityName = ""
     
+    var islocation = true
     //MARK: - Realm DataBase
    
     
@@ -96,9 +104,7 @@ class locationViewController: UIViewController,UITableViewDataSource {
     }
     
     func initializeRealmDataBase() {
-        
-        getInformation(cityIdDefult)
-        let allcity = realm.objects(CityRealm)
+        var allcity = realm.objects(CityRealm)
         if allcity.count == 0
         {
             NetWorkHelper.netWorkHelper.fetchAllCity("allchina")
@@ -106,48 +112,69 @@ class locationViewController: UIViewController,UITableViewDataSource {
                 try! realm.write
                     {
                     realm.add(succeed)
+                        
                     }
             }
         }
         
     }
-   
+    
+    
+    var manager :AMapLocationManager!
+    
+    
     //MARK: ViewController life
     override func viewDidLoad() {
         super.viewDidLoad()
-         print(path)
         self.initializeRealmDataBase()
-       self.location.text = cityName
-        //self.Spinner.startAnimating()
-       // self.location.text = "正在解析当前地址,请稍侯"
-       // self.MapJSONAnalyze()
-        
+        self.Spinner.hidden = true
+        print(realm.configuration.fileURL)
+        if islocation{
+        self.location.text = "正在解析当前地址,请稍侯"
+            self.Spinner.hidden = false
+            self.Spinner.startAnimating()
+
+        }else{
+            location.text = cityName
+        }
+        self.MapJSONAnalyze()
         self.managerImageAndLabel()
-        self.tableview.estimatedRowHeight = 80
+        self.tableview.estimatedRowHeight = 50
         self.tableview.rowHeight = UITableViewAutomaticDimension
-        
-        
         
     }
 
     //MARK: MapJSONAnalyze
     func MapJSONAnalyze()  {
-        let a = AFNetHelper()
-     
-        a.setNetWorkHelpercompletionHandler{ data in
-           let jsonData = JSON(data)
-          
-            let province = jsonData["regeocode"]["addressComponent"]["province"].stringValue
-            let  district = jsonData["regeocode"]["addressComponent"]["district"].stringValue
-            self.Spinner.stopAnimating()
-            self.Spinner.hidden = true
-          self.location.text = province + ":" + district
-            
-            
-        }
-        
+        if islocation == true
+        {
+        manager = Location.singleLocation.configManager()
+        Location.singleLocation.locationResult(manager, closer_:
+            { recode in
 
+                var name = recode.city
+                 name.removeAtIndex(name.endIndex.predecessor())
+                
+                self.location.text = name
+                
+                self.Spinner.stopAnimating()
+                self.Spinner.hidden = true
+                let result = realm.objects(CityRealm).filter(" cityName = '\(name)'")
+                
+                let citylist = CustomCityList()
+                
+                citylist.city = result.first
+                
+                try! realm.write{
+                    realm.add(citylist)
+                }
+                
+                self.cityIdDefult = result.first?.id
+         })
+        }
     }
+    
+    
     //MARK: Set UI Function
     func getWeatherImage(URL:String) ->UIImage
     {

@@ -14,43 +14,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 {
 
     var window: UIWindow?
-
-     
-    
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
-    {
-        // Override point for customization after application launch.
-        
+ //MARK: - Set the Realm Version
+    func configRealm (){
+       
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+            schemaVersion: 2,
+            migrationBlock:
+            { migration, oldSchemaVersion in
+                
+                migration.enumerate(CityRealm.className())
+                { oldObject, newObject in
+                    
+                    if oldSchemaVersion < 1
+                    {
+                        
+                        newObject!["pinYin"] = ""
+                        newObject!["firstLetter"] = ""
+                    }
+                    
+                }
+        })
+    }
+//MARK: - Set UI Appearance
+    func configUIAppearance()  {
         //set UI
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UIView.appearance().tintColor = UIColor.whiteColor()
- 
-
+        
+        
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         if let font = UIFont(name: "Avenir-Light", size: 18.0){
             UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),NSFontAttributeName:font]
             
             
         }
-        //set Realm
-        Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            schemaVersion: 2,
-            migrationBlock:
-            { migration, oldSchemaVersion in
-                    
-                migration.enumerate(CityRealm.className())
-                { oldObject, newObject in
-                   
-                    if oldSchemaVersion < 1
-                    {
-                            
-                            newObject!["pinYin"] = ""
-                            newObject!["firstLetter"] = ""
-                    }
-                        
-                }
-            })
+    }
+    
+    func configGaoDeMap(){
+        AMapServices.sharedServices().apiKey = person.GaodeAPIKey
         
+    }
+    
+    func config(){
+        configRealm()
+        configUIAppearance()
+        configGaoDeMap()
+    }
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
+        
+          config()
+      
           return true
     }
 
