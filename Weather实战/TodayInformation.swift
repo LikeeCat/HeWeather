@@ -28,6 +28,9 @@ struct TodayInformation{
     //能见度(km)
    
     var vis :String = " "
+    
+    var srDate:NSDate!
+    var ssDate:NSDate!
    
     static let rows = 5
     static let weatherInformationkeyArray = ["日出","日落","降水概率","降水量","湿度","风速","风力等级","风向","气压","能见度"]

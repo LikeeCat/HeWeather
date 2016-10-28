@@ -11,7 +11,9 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     //MARK: - Config array
     var CityList = [CityRealm]()
     var searchCityList = [CityRealm]()
+   //添加城市列表
     var addCity = CityRealm()
+    
     var indexingArray = [String]()
     
     var secationArrayIndex = [Int]()
@@ -97,7 +99,6 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         let cell = tableView.dequeueReusableCellWithIdentifier("CityListCell", forIndexPath: indexPath)
         if sc.active
         {
-            
             cell.textLabel?.text = searchCityList[indexPath.row].cityName
             cell.detailTextLabel?.text = searchCityList[indexPath.row].prov
         }
@@ -132,8 +133,16 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+        let addCity:CityRealm!
         
-        let  addCity = CityList[secationArrayIndex[indexPath.section] + indexPath.row]
+        if sc.active
+        {
+          addCity = searchCityList[secationArrayIndex[indexPath.section] + indexPath.row]
+        }
+        else
+        {
+        addCity = CityList[secationArrayIndex[indexPath.section] + indexPath.row]
+        }
         
         let list = CustomCityList()
         list.city = addCity
@@ -185,8 +194,8 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
-        
-        return indexingArray[section]
+      return   sc.active ?  "" :  indexingArray[section]
+      
     }
  
 }

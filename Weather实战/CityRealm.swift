@@ -23,13 +23,6 @@ class CityRealm: Object {
         return  "id"
     }
     
-    
- 
-// Specify properties to ignore (Realm won't persist these)
-    
-//  override static func ignoredProperties() -> [String] {
-//    return []
-//  }
 }
 class LocationCityRealm: Object {
      var cityList = List<CityRealm>()

@@ -34,6 +34,7 @@ struct Location {
             {
                 print("locError:\(error.code) - \(error.localizedDescription)")
             
+                self.locationResult(mapManager, closer_: closer_)
             
                 if(Int(error.code) == AMapLocationErrorCode.LocateFailed.rawValue)
         

@@ -14,44 +14,59 @@ import RealmSwift
 
 class WeatherViewController: UIViewController,UITableViewDataSource {
 
+    @IBOutlet weak private var background: UIImageView!
+  
+    @IBOutlet weak private var NowWeatherTmpMaxMin: UILabel!
+    @IBOutlet weak private var NowWeatherTmp: UILabel!
+    @IBOutlet weak private var NowWeatherWind: UILabel!
+    
+    //MARK:weekWeather information
+    @IBOutlet weak private var Weather0Image: UIImageView!
+    @IBOutlet weak private var Weather1Image: UIImageView!
+    @IBOutlet weak private var Weather2Image: UIImageView!
+    @IBOutlet weak private var Weather3Image: UIImageView!
+    @IBOutlet weak private var Weather4Image: UIImageView!
+    @IBOutlet weak private var Weather5Image: UIImageView!
+    
+    @IBOutlet weak private var weather0Lable: UILabel!
+    @IBOutlet weak private var weather1Lable: UILabel!
+    @IBOutlet weak private var weather2Lable: UILabel!
+    @IBOutlet weak private var weather3Lable: UILabel!
+    @IBOutlet weak private var weather4Lable: UILabel!
+    @IBOutlet weak private var weather5Lable: UILabel!
+    
+    @IBOutlet weak private var weekday0: UILabel!
+    @IBOutlet weak private var weekday1: UILabel!
+    @IBOutlet weak private var weekday2: UILabel!
+    @IBOutlet weak private  var weekday3: UILabel!
+    @IBOutlet weak private var weekday4: UILabel!
+    @IBOutlet weak private var weekday5: UILabel!
+    
+    //MARK: UI Control
+    @IBOutlet weak private var Spinner: UIActivityIndicatorView!
+    @IBOutlet weak private var location: UILabel!
+    @IBOutlet weak private var tableview: UITableView!
+    //MARK: Page View Controller Property
+    
+    @IBOutlet private weak var pageControl: UIPageControl!
+    internal var index = 0
+    internal var pages = 0
+
+    private var UIImageViewData = [UIImageView]()
+    private var UILabelData = [UILabel]()
+    private var UIWeekData = [UILabel]()
     
     let path = NSHomeDirectory()
     
-    @IBOutlet weak var NowWeatherTmpMaxMin: UILabel!
-    @IBOutlet weak var NowWeatherTmp: UILabel!
-    @IBOutlet weak var NowWeatherWind: UILabel!
-    
-    //MARK:weekWeather information
-    @IBOutlet weak var Weather0Image: UIImageView!
-    
-    @IBOutlet weak var Weather1Image: UIImageView!
-    @IBOutlet weak var Weather2Image: UIImageView!
-    @IBOutlet weak var Weather3Image: UIImageView!
-    
-    @IBOutlet weak var Weather4Image: UIImageView!
-    @IBOutlet weak var Weather5Image: UIImageView!
-    
-    @IBOutlet weak var weather0Lable: UILabel!
-    @IBOutlet weak var weather1Lable: UILabel!
-    @IBOutlet weak var weather2Lable: UILabel!
-    @IBOutlet weak var weather3Lable: UILabel!
-    @IBOutlet weak var weather4Lable: UILabel!
-    @IBOutlet weak var weather5Lable: UILabel!
-    
-    //MARK: UI Control
-    @IBOutlet weak var Spinner: UIActivityIndicatorView!
-    @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var tableview: UITableView!
-    //MARK: Page View Controller Property
-    
-    var index = 0 
-    
+    let nowTime = NSDate()
+    var srDate:NSDate!
+    var ssDate:NSDate!
+  
     //MARK: weekWeather Property Observers
 
-    var UIImageViewData = [UIImageView]()
-    var UILabelData = [UILabel]()
-   
-    var weekWeather = [Daily]()
+    
+    //一周天气
+    private var weekWeather = [Daily]()
     {
         didSet
         {
@@ -59,51 +74,97 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
             self.mapWeatherInformation()
         }
     }
-    var suggest = ""
+    
+    //建议
+    private var suggest = ""
     {
            didSet
            {
             self.tableview.reloadData()
            }
     }
-    var tmpNow = "0°"
+   
+    //现在温度
+    private var tmpNow = "0°"
     {
         didSet
         {
             self.NowWeatherTmp.text = tmpNow
         }
     }
- 
-    var todayInformation = TodayInformation()
+    
+    //今天的天气
+    private  var todayInformation = TodayInformation()
     {
         didSet
         {
             self.tableview.reloadData()
         }
     }
-    var cityIdDefult:String!{
-        didSet{
+    private var manager :AMapLocationManager!
 
-        getInformation(cityIdDefult)
-        }
+    //public property
+    internal  var cityIdDefult:String!
+    internal  var cityName = ""
+    internal  var islocation = true
+
+
+    //MARK: ViewController life
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.tableview.estimatedRowHeight = 50
+        self.tableview.rowHeight = UITableViewAutomaticDimension
+        self.MapJSONAnalyze()
     }
- 
-    var cityName = ""
     
-    var islocation = true
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.initializeRealmDataBase()
+        self.Spinner.hidden = true
+//        print(realm.configuration.fileURL)
+        if islocation{
+            self.location.text = "正在解析当前地址,请稍侯"
+            self.Spinner.hidden = false
+            self.Spinner.startAnimating()
+            
+        }else{
+            location.text = cityName
+        }
+        self.managerImageAndLabel()
+        
+       
+        self.pageControl.numberOfPages = pages
+        self.pageControl.currentPage = index
+    
+        
+         }
+        
+        override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getInformation(cityIdDefult)
+        
+    }
+    
+    
     //MARK: - Realm DataBase
    
     
-    func getInformation(str:String){
+    func getInformation(str:String)
+    {
        NetWorkHelper.netWorkHelper.fetch(str)
        { (succeed, responseValue) in
        self.weekWeather = succeed
        self.tmpNow = responseValue["HeWeather data service 3.0"][0]["now"]["tmp"].stringValue
        self.suggest = responseValue["HeWeather data service 3.0"][0]["suggestion"]["comf"]["txt"].stringValue
+        
         }
     }
     
-    func initializeRealmDataBase() {
+    func initializeRealmDataBase()
+    {
         var allcity = realm.objects(CityRealm)
         if allcity.count == 0
         {
@@ -120,30 +181,7 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
     }
     
     
-    var manager :AMapLocationManager!
-    
-    
-    //MARK: ViewController life
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.initializeRealmDataBase()
-        self.Spinner.hidden = true
-        print(realm.configuration.fileURL)
-        if islocation{
-        self.location.text = "正在解析当前地址,请稍侯"
-            self.Spinner.hidden = false
-            self.Spinner.startAnimating()
-
-        }else{
-            location.text = cityName
-        }
-        self.MapJSONAnalyze()
-        self.managerImageAndLabel()
-        self.tableview.estimatedRowHeight = 50
-        self.tableview.rowHeight = UITableViewAutomaticDimension
-        
-    }
-
+ 
     //MARK: MapJSONAnalyze
     func MapJSONAnalyze()  {
         if islocation == true
@@ -151,24 +189,17 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
         manager = Location.singleLocation.configManager()
         Location.singleLocation.locationResult(manager, closer_:
             { recode in
-
                 var name = recode.city
-                 name.removeAtIndex(name.endIndex.predecessor())
-                
+                name.removeAtIndex(name.endIndex.predecessor())
                 self.location.text = name
-                
                 self.Spinner.stopAnimating()
                 self.Spinner.hidden = true
-                let result = realm.objects(CityRealm).filter(" cityName = '\(name)'")
-                
+                let result = realm.objects(CityRealm).filter("cityName = '\(name)'")
                 let citylist = CustomCityList()
-                
                 citylist.city = result.first
-                
                 try! realm.write{
                     realm.add(citylist)
                 }
-                
                 self.cityIdDefult = result.first?.id
          })
         }
@@ -182,14 +213,51 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
         return image
     }
     
+    func switchParam(param:Int,isDay:Bool) -> String{
+        var imageName = ""
+        switch param {
+            //晴
+            case 100:
+                imageName = isDay ?  "still_fair_bg" : "still_fair_night_bg"
+            case 101...103:
+                imageName = isDay ? "still_clouds_bg" : "still_clouds_night_bg"
+            case 104:
+                imageName = isDay ? "still_cloudy_bg" : "still_cloudy_night_bg"
+            case 300...313:
+                imageName = isDay ? "still_rain_bg" : "still_rain_night_bg"
+            
+            case 400...407:
+                imageName = isDay ? "still_snow_bg" : "still_snow_night_bg"
+            case 500...501:
+                imageName = isDay ? "still_fog_bg" : "still_fog_night_bg"
+            case 502:
+                imageName = isDay ? "still_haze_bg" : "still_haze_night_bg"
+            default:
+                imageName = isDay ?  "still_fair_bg" : "still_fair_night_bg"
+            
+            }
+        
+        return imageName
+        
+    }
     
     func setWeatherImage()
     {
         var paramter = [String]()
+        var isDay = false
+        
         for weather in weekWeather
         {
-            let param = weather.cond?.code_d
-            paramter.append(param!)
+            var param = ""
+            if(DateOperation.operation.isDay(nowTime, srDate: srDate, ssDate: ssDate)){
+                param = (weather.cond?.code_d)!
+                isDay = true
+            }else{
+                 param = (weather.cond?.code_n)!
+                
+            }
+
+            paramter.append(param)
         }
         var URL = [String]()
         for par in paramter
@@ -197,9 +265,7 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
             let url = person.WeatherImageBaseURL + par + person.WeatherImageTail
             URL.append(url)
         }
-        
         var i = 0
-        
         UIImageViewData.map
         {
             imageData in
@@ -217,22 +283,44 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
             label.text = weekWeather[i].cond?.txt_n
             i += 1
         }
-
-
-        
+        let weekArray =   DateOperation.operation.setWeekday(nowTime)
+        for number in 0..<UIWeekData.count
+        {
+            UIWeekData[number].text = weekArray[number]
+        }
     }
+    
     
     func setNowWeather()
     {
+        var isDay = false
+        let ssDateString = weekWeather[0].date + " " + (weekWeather[0].astro?.ss)!
+        let srDateString = weekWeather[0].date + " " + (weekWeather[0].astro?.sr)!
+        let dateSet = DateOperation.operation.getSunriseAndSet(srDateString, sunset: ssDateString)
+        srDate = dateSet.0
+        ssDate = dateSet.1
         let max = weekWeather[0].tmp?.max
-        print(max, terminator: "")
-       
         let min = weekWeather[0].tmp?.min
-        print(min, terminator: "")
-        
         self.setWeatherImage()
         self.NowWeatherTmpMaxMin.text = "\(min!)℃/\(max!)℃"
-        self.NowWeatherWind.text = weekWeather[0].wind?.sc
+        if (DateOperation.operation.isDay(nowTime, srDate: srDate, ssDate: ssDate))
+        {
+            isDay = true
+            
+        
+          let imageName = switchParam(Int(weekWeather[0].cond!.code_d)!, isDay: isDay)
+            
+            self.background.image = UIImage(named: imageName)
+            self.NowWeatherWind.text = (weekWeather[0].cond?.txt_d)!
+            
+        }
+        else
+        {
+        self.NowWeatherWind.text = weekWeather[0].cond?.txt_n
+         let imageName = switchParam(Int(weekWeather[0].cond!.code_d)!, isDay: isDay)
+            self.background.image = UIImage(named: imageName)
+        
+        }
     }
     
     func mapWeatherInformation()
@@ -249,18 +337,18 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
          self.todayInformation.dir = (todayInformationInArray.wind?.dir)!
          self.todayInformation.pres = todayInformationInArray.pres
          self.todayInformation.vis = todayInformationInArray.vis
-    }
-   
     
+            }
+
     //MARK: - Table View
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return 2
     }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-       
         switch section
         {
         case 0:
@@ -274,7 +362,6 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
         let constant = Costant()
         if indexPath.section == 0
         {
-            
             let cell = tableView.dequeueReusableCellWithIdentifier("suggestCell", forIndexPath: indexPath) as! SuggestCell
             cell.Today.text = "今天:"
             cell.suggestInformation.text = self.suggest
@@ -291,8 +378,6 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
                 cell.value.text = todayInformation.sr
                 cell.key1.text = TodayInformation.weatherInformationkeyArray[1]+constant.tailSymbol
                 cell.value1.text = todayInformation.ss
-            
-        
             case 1:
                 cell.key .text = TodayInformation.weatherInformationkeyArray[2]+constant.tailSymbol
 
@@ -328,8 +413,6 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
             
             return cell
         }
-        
-    
     }
     
     //MARK: - manager Image And Label
@@ -337,6 +420,8 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
     {
         UIImageViewData = [self.Weather0Image,self.Weather1Image,self.Weather2Image,self.Weather3Image,self.Weather4Image,self.Weather5Image]
         UILabelData = [self.weather0Lable,self.weather1Lable,self.weather2Lable,self.weather3Lable,self.weather4Lable,self.weather5Lable]
+        
+        UIWeekData = [self.weekday0,self.weekday1,self.weekday2,self.weekday3,self.weekday4,self.weekday5]
 
     }
     

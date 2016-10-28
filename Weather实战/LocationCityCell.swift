@@ -10,10 +10,11 @@ import UIKit
 import RealmSwift
 
 class locationCityCell: UITableViewCell {
-    let timer = NSCalendar.currentCalendar()
     
     let date = NSDate()
-
+    
+    var srDate:NSDate!
+    var ssDate:NSDate!
     @IBOutlet weak var cond: UILabel!
     @IBOutlet weak var temp: UILabel!
     @IBOutlet weak var location: UILabel!
@@ -25,8 +26,25 @@ class locationCityCell: UITableViewCell {
     func updateUI(city: CityRealm)  {
         
             NetWorkHelper.netWorkHelper.fetch(city.id, clouser: { (succeed, _) in
-               self.cond.text = succeed.first?.wind?.sc
-                print(self.cond.text)
+                
+                let dateString = (succeed.first?.date)! + " "
+                
+                let srDateString = dateString + (succeed.first?.astro?.sr)!
+                
+                let ssDateString = dateString + (succeed.first?.astro?.ss)!
+                let dateSet = DateOperation.operation.getSunriseAndSet(srDateString, sunset: ssDateString)
+                self.srDate = dateSet.0
+                self.ssDate = dateSet.1
+                print(succeed.first?.cond?.txt_d)
+                if DateOperation.operation.isDay(self.date, srDate: self.srDate, ssDate: self.ssDate){
+                    self.cond.text = succeed.first?.cond?.txt_d
+                
+                }else{
+                    self.cond.text = succeed.first?.cond?.txt_n
+
+                }
+                
+
                 self.temp.text = "\((succeed.first?.tmp.min)!)℃/\((succeed.first?.tmp.max)!)℃"
             })
         }
@@ -34,8 +52,8 @@ class locationCityCell: UITableViewCell {
     
     func cellForRowInlocationCityCell(indexpath:NSIndexPath,tableView:UITableView,r: [CityRealm]){
         let city  = r[indexpath.row]
-        
         self.updateUI(city)
+
         self.location.text = city.cityName
     
         self.time.text = getTime(date)
@@ -44,9 +62,11 @@ class locationCityCell: UITableViewCell {
 
     func getTime(date:NSDate) -> String {
     
-        let NowTime = timer.components([.Hour,.Minute,.Second], fromDate: date)
-   
-         let dateString = "\( NowTime.hour):\( NowTime.minute)"
+        let dateFormatter =  NSDateFormatter()
+        
+        dateFormatter.dateFormat = "HH:mm"
+        
+        let dateString = dateFormatter.stringFromDate(date);
        
         return dateString
     }

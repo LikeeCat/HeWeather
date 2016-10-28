@@ -131,7 +131,7 @@ class Cond: Mappable
     {
         code_d <- map["code_d"]
         code_n <- map["code_n"]
-        txt_d <- map[" txt_d"]
+        txt_d <- map["txt_d"]
         txt_n <- map["txt_n"]
         
     }

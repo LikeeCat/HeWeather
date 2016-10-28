@@ -136,7 +136,6 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.citySelect = cityArray[indexPath.row]
-        print(citySelect.cityName)
          self.performSegueWithIdentifier("backHome", sender: nil)
     }
     @IBAction  func back(unwindSegue: UIStoryboardSegue)

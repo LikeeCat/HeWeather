@@ -10,6 +10,8 @@ import Alamofire
 import Foundation
 import ObjectMapper
 import RealmSwift
+
+
 class  NetWorkHelper {
     
     static let netWorkHelper = NetWorkHelper()
@@ -19,7 +21,6 @@ class  NetWorkHelper {
         
         let  paramterd = person.cityID + "=" + name + "&" + person.key + "=" + person.KeyValue
         let url = person.BaseURL + paramterd
-        print(url, terminator: "")
         Alamofire.request(.GET, url).validate().responseJSON { respon in
             let jsonValue = JSON(respon.result.value!)
             if let dic = respon.result.value as? NSDictionary {
@@ -78,7 +79,6 @@ class  NetWorkHelper {
                        
  
                         }
-                   print(cityArray.count)
                  
                     clouser(succeed: cityArray, responseValue: jsonValue)
                 

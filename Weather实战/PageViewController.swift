@@ -37,7 +37,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
         let resultCityList = realm.objects(CustomCityList)
      
         for list in resultCityList{
-          cityList.append( list.city)
+          cityList.append(list.city)
         }
         
     }
@@ -46,27 +46,42 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         var index = (viewController as! WeatherViewController).index
-        index += 1
-        return viewControllerAtIndex(index)
+       
+        if index == cityList.count-1 {
+            return nil
+        }
+        else{
+           
+            return viewControllerAtIndex(index+1)
+  
+        }
+
     }
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         var index = (viewController as! WeatherViewController).index
-        index -= 1
-        return viewControllerAtIndex(index)
+        if index == 0 {
+            return nil
+        }
+        else{
+        return viewControllerAtIndex(index - 1)
+        }
     }
     
     //setDefultLocation
   
    
     func viewControllerAtIndex(index:Int) ->WeatherViewController?{
+        
+        var contentVC:WeatherViewController!
         if cityList.isEmpty == true
         {
             //let recodeResult:AMapLocationReGeocode!
-            if let contentVC = storyboard?.instantiateViewControllerWithIdentifier("GuiderContentController") as? WeatherViewController
+            if let  VC = storyboard?.instantiateViewControllerWithIdentifier("GuiderContentController") as? WeatherViewController
             {
        
-                contentVC.islocation = true
-                return contentVC
+                 VC.islocation = true
+                
+                contentVC = VC
             
             }
         }
@@ -75,18 +90,20 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
         {
             if case 0 ..< cityList.count = index
              {
-                if let contentVC = storyboard?.instantiateViewControllerWithIdentifier("GuiderContentController") as? WeatherViewController
+                if let VC = storyboard?.instantiateViewControllerWithIdentifier("GuiderContentController") as? WeatherViewController
                 {
-                contentVC.islocation = false
-                    contentVC.cityIdDefult = cityList[index].id
-                    contentVC.cityName = cityList[index].cityName
-                    contentVC.index = index
-                return contentVC
-
+                    VC.islocation = false
+                    VC.cityIdDefult = cityList[index].id
+                    VC.cityName = cityList[index].cityName
+                    VC.index = index
+                    print(index)
+                    VC.pages = cityList.count
+                  
+                   contentVC = VC
                  }
              }
         }
-        return nil
+        return contentVC
     }
     
     @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
@@ -97,9 +114,21 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
             cityList.removeAll()
             self.setSubViewController()
             let index = searchCityIndex(selectCity)
-            
-            if let jumpIndex =  viewControllerAtIndex(index){
-                setViewControllers([jumpIndex], direction: .Forward, animated: true, completion: nil)
+            if let jumpIndex =  viewControllerAtIndex(index)
+            {
+                
+                setViewControllers([jumpIndex], direction: .Forward, animated: true)
+                { done in
+                    if done
+                    {
+                        dispatch_async(dispatch_get_main_queue())
+                        {
+                            self.setViewControllers([jumpIndex], direction: .Forward, animated: false, completion: {done in })
+                        }
+                    }
+                }
+                
+
             }
 
             

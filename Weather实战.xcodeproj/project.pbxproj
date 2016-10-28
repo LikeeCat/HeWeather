@@ -12,8 +12,8 @@
 		2F1520E11D87ACC900696430 /* InformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1520E01D87ACC900696430 /* InformationCell.swift */; };
 		2F1520E51D87B0B600696430 /* TodayInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1520E41D87B0B600696430 /* TodayInformation.swift */; };
 		2F2818141D83C887007D4944 /* ExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2818131D83C887007D4944 /* ExtensionClass.swift */; };
-		2F2818211D840DAE007D4944 /* AFNetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2818201D840DAE007D4944 /* AFNetHelper.m */; };
 		2F43C9D41DA0A4D000510C2A /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F43C9D31DA0A4D000510C2A /* PageViewController.swift */; };
+		2F5849BE1DC2143800284AA8 /* WeatherBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5849BD1DC2143800284AA8 /* WeatherBackground.swift */; };
 		2F5E45661D8B90AE006ED557 /* AddCityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E45651D8B90AE006ED557 /* AddCityCell.swift */; };
 		2F5E45681D8BE708006ED557 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5E45671D8BE708006ED557 /* Assets.xcassets */; };
 		2F7092DE1D7A8B0500DDE12C /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7092DD1D7A8B0500DDE12C /* WeatherViewController.swift */; };
@@ -36,10 +36,9 @@
 		2F1520E01D87ACC900696430 /* InformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationCell.swift; sourceTree = "<group>"; };
 		2F1520E41D87B0B600696430 /* TodayInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayInformation.swift; sourceTree = "<group>"; };
 		2F2818131D83C887007D4944 /* ExtensionClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionClass.swift; sourceTree = "<group>"; };
-		2F28181F1D840DAE007D4944 /* AFNetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetHelper.h; sourceTree = "<group>"; };
-		2F2818201D840DAE007D4944 /* AFNetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetHelper.m; sourceTree = "<group>"; };
 		2F2818251D8413DA007D4944 /* Weather实战-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Weather实战-Bridging-Header.h"; sourceTree = "<group>"; };
 		2F43C9D31DA0A4D000510C2A /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		2F5849BD1DC2143800284AA8 /* WeatherBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherBackground.swift; sourceTree = "<group>"; };
 		2F5E45651D8B90AE006ED557 /* AddCityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCityCell.swift; sourceTree = "<group>"; };
 		2F5E45671D8BE708006ED557 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F7092DD1D7A8B0500DDE12C /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -90,8 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				2F8B9F8D1D80ED0000A8B4A0 /* NetWorkHelper.swift */,
-				2F28181F1D840DAE007D4944 /* AFNetHelper.h */,
-				2F2818201D840DAE007D4944 /* AFNetHelper.m */,
 				2F5E45671D8BE708006ED557 /* Assets.xcassets */,
 				2F99894B1DAF5699006A7E21 /* DateOperation.swift */,
 			);
@@ -108,6 +105,7 @@
 				2F755AD71D7EEC4500C15C04 /* APIModel.swift */,
 				2F1520E41D87B0B600696430 /* TodayInformation.swift */,
 				2F7F15761D88DF5B00F6FF07 /* CityRealm.swift */,
+				2F5849BD1DC2143800284AA8 /* WeatherBackground.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -316,12 +314,12 @@
 				2F7F15771D88DF5C00F6FF07 /* CityRealm.swift in Sources */,
 				2F8B9F8E1D80ED0000A8B4A0 /* NetWorkHelper.swift in Sources */,
 				2F7F15711D87F94900F6FF07 /* LocationCityCell.swift in Sources */,
-				2F2818211D840DAE007D4944 /* AFNetHelper.m in Sources */,
 				2F7F156F1D87F8F100F6FF07 /* AddCityViewController.swift in Sources */,
 				2F755AD81D7EEC4500C15C04 /* APIModel.swift in Sources */,
 				2F5E45661D8B90AE006ED557 /* AddCityCell.swift in Sources */,
 				2F1520DF1D87ACA000696430 /* SuggestCell.swift in Sources */,
 				2F2818141D83C887007D4944 /* ExtensionClass.swift in Sources */,
+				2F5849BE1DC2143800284AA8 /* WeatherBackground.swift in Sources */,
 				2F43C9D41DA0A4D000510C2A /* PageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
