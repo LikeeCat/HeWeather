@@ -9,9 +9,13 @@ import UIKit
 
 class SearchController: UITableViewController,UISearchResultsUpdating{
     //MARK: - Config array
-    var CityList = [CityRealm]()
+    //城市列表
+    var cityList = [CityRealm]()
+    //搜过结果
     var searchCityList = [CityRealm]()
-   //添加城市列表
+    //用户城市
+    var customCityList = [CityRealm]()
+    //添加城市列表
     var addCity = CityRealm()
     
     var indexingArray = [String]()
@@ -53,7 +57,7 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     
         for city in allCity
         {
-            CityList.append(city)
+            cityList.append(city)
             
         }
        
@@ -90,7 +94,7 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         
         return   sc.active ?
         searchCityList.count : section == secationArrayIndex.count - 1 ?
-            CityList.count - sstart :secationArrayIndex[section + 1] - sstart
+            cityList.count - sstart :secationArrayIndex[section + 1] - sstart
         
 
     }
@@ -105,8 +109,8 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         else
         {
             
-            cell.textLabel?.text = CityList[secationArrayIndex[indexPath.section] + indexPath.row].cityName
-            cell.detailTextLabel?.text = CityList[secationArrayIndex[indexPath.section] + indexPath.row].prov
+            cell.textLabel?.text = cityList[secationArrayIndex[indexPath.section] + indexPath.row].cityName
+            cell.detailTextLabel?.text = cityList[secationArrayIndex[indexPath.section] + indexPath.row].prov
         
         
         }
@@ -119,7 +123,7 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     {
         var temp = [CityRealm]()
         
-        for city in CityList
+        for city in cityList
         {
             if (city.cityName.containsString(searchController.searchBar.text!) || city.prov.containsString(searchController.searchBar.text!) )
             {
@@ -133,7 +137,6 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let addCity:CityRealm!
         
         if sc.active
         {
@@ -141,17 +144,25 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         }
         else
         {
-        addCity = CityList[secationArrayIndex[indexPath.section] + indexPath.row]
+        addCity = cityList[secationArrayIndex[indexPath.section] + indexPath.row]
         }
         
         let list = CustomCityList()
         list.city = addCity
+        
+      
+        if (customCityList.indexOf(addCity) != nil){
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            self.performSegueWithIdentifier("back", sender: nil)
+        }
+        else{
         try! realm.write
             {
               realm.add(list)
            }
-    
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+       tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.performSegueWithIdentifier("back", sender: nil)
     }
     
    
@@ -162,12 +173,12 @@ class SearchController: UITableViewController,UISearchResultsUpdating{
         
         var array = [String]()
         var indexArray = [Int]()
-        for city in CityList
+        for city in cityList
         {
             if( array.contains(city.firstLetter) == false)
             {
                 array.append(city.firstLetter)
-                let index = CityList.indexOf(city)
+                let index = cityList.indexOf(city)
                 indexArray.append(index!)
                 
             }

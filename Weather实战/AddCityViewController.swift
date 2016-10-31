@@ -11,7 +11,6 @@ import RealmSwift
 class AddCityViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
     var cityArray = [CityRealm]()
     var customRealmArray = [CustomCityList]()
-    
     var citySelect:CityRealm!
     @IBOutlet weak var TableView: UITableView!
     
@@ -28,6 +27,8 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        cityArray.removeAll()
+        customRealmArray.removeAll()
         self.configCustomCityList()
         self.TableView.reloadData()
     }
@@ -102,7 +103,7 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
     {
-        if cityArray.count == 1
+        if (indexPath.row == 0)
         {
             return false
         }
@@ -118,6 +119,8 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
         {
         
           let deleteObject = customRealmArray[indexPath.row]
+        
+            print("\(deleteObject) at indexPath is \(indexPath.row)")
 
             try! realm.write
             {
@@ -128,20 +131,41 @@ class AddCityViewController: UIViewController ,UITableViewDataSource,UITableView
             cityArray.removeAtIndex(indexPath.row)
             customRealmArray.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Middle)
-            tableView.reloadData()
+
         }
+
     }
    
     //MARK: - Table View Selected
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.reloadData()
+
         self.citySelect = cityArray[indexPath.row]
+        print(self.citySelect)
          self.performSegueWithIdentifier("backHome", sender: nil)
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showSearchController" {
+            
+            let searchVC = segue.destinationViewController as! UINavigationController
+            
+            let VC =   searchVC.viewControllers.first as! SearchController
+            
+            VC.customCityList = cityArray
+        }
+        
+     
+    
     }
     @IBAction  func back(unwindSegue: UIStoryboardSegue)
     {
         
     }
+
     
 }
 

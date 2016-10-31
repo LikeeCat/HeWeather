@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2FA98FDE1D5B513A004F1964"
-               BuildableName = "Weather&#x5b9e;&#x6218;.app"
-               BlueprintName = "Weather&#x5b9e;&#x6218;"
+               BuildableName = "&#x732b;&#x9f2c;&#x9f20;&#x62a5;&#x5929;&#x6c14;.app"
+               BlueprintName = "&#x732b;&#x9f2c;&#x9f20;&#x62a5;&#x5929;&#x6c14;"
                ReferencedContainer = "container:Weather&#x5b9e;&#x6218;.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2FA98FDE1D5B513A004F1964"
-            BuildableName = "Weather&#x5b9e;&#x6218;.app"
-            BlueprintName = "Weather&#x5b9e;&#x6218;"
+            BuildableName = "&#x732b;&#x9f2c;&#x9f20;&#x62a5;&#x5929;&#x6c14;.app"
+            BlueprintName = "&#x732b;&#x9f2c;&#x9f20;&#x62a5;&#x5929;&#x6c14;"
             ReferencedContainer = "container:Weather&#x5b9e;&#x6218;.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2FA98FDE1D5B513A004F1964"
-            BuildableName = "Weather&#x5b9e;&#x6218;.app"
-            BlueprintName = "Weather&#x5b9e;&#x6218;"
+            BuildableName = "&#x732b;&#x9f2c;&#x9f20;&#x62a5;&#x5929;&#x6c14;.app"
+            BlueprintName = "&#x732b;&#x9f2c;&#x9f20;&#x62a5;&#x5929;&#x6c14;"
             ReferencedContainer = "container:Weather&#x5b9e;&#x6218;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -82,8 +82,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2FA98FDE1D5B513A004F1964"
-            BuildableName = "Weather&#x5b9e;&#x6218;.app"
-            BlueprintName = "Weather&#x5b9e;&#x6218;"
+            BuildableName = "&#x732b;&#x9f2c;&#x9f20;&#x62a5;&#x5929;&#x6c14;.app"
+            BlueprintName = "&#x732b;&#x9f2c;&#x9f20;&#x62a5;&#x5929;&#x6c14;"
             ReferencedContainer = "container:Weather&#x5b9e;&#x6218;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

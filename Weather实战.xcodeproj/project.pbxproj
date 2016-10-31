@@ -49,7 +49,7 @@
 		2F8B9F8D1D80ED0000A8B4A0 /* NetWorkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkHelper.swift; sourceTree = "<group>"; };
 		2F8CFF541DA657C90041919B /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		2F99894B1DAF5699006A7E21 /* DateOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOperation.swift; sourceTree = "<group>"; };
-		2FA98FDF1D5B513A004F1964 /* Weather实战.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather实战.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FA98FDF1D5B513A004F1964 /* 猫鼬鼠报天气.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "猫鼬鼠报天气.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA98FE21D5B513A004F1964 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FA98FE91D5B513A004F1964 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FA98FEE1D5B513A004F1964 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 		2FA98FE01D5B513A004F1964 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FA98FDF1D5B513A004F1964 /* Weather实战.app */,
+				2FA98FDF1D5B513A004F1964 /* 猫鼬鼠报天气.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,9 +181,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2FA98FDE1D5B513A004F1964 /* Weather实战 */ = {
+		2FA98FDE1D5B513A004F1964 /* 猫鼬鼠报天气 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2FA98FF31D5B513A004F1964 /* Build configuration list for PBXNativeTarget "Weather实战" */;
+			buildConfigurationList = 2FA98FF31D5B513A004F1964 /* Build configuration list for PBXNativeTarget "猫鼬鼠报天气" */;
 			buildPhases = (
 				D8660F8A1D803AC9C91634DD /* [CP] Check Pods Manifest.lock */,
 				2FA98FDB1D5B513A004F1964 /* Sources */,
@@ -196,9 +196,9 @@
 			);
 			dependencies = (
 			);
-			name = "Weather实战";
+			name = "猫鼬鼠报天气";
 			productName = "Weather实战";
-			productReference = 2FA98FDF1D5B513A004F1964 /* Weather实战.app */;
+			productReference = 2FA98FDF1D5B513A004F1964 /* 猫鼬鼠报天气.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -232,7 +232,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2FA98FDE1D5B513A004F1964 /* Weather实战 */,
+				2FA98FDE1D5B513A004F1964 /* 猫鼬鼠报天气 */,
 			);
 		};
 /* End PBXProject section */
@@ -483,7 +483,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2FA98FF31D5B513A004F1964 /* Build configuration list for PBXNativeTarget "Weather实战" */ = {
+		2FA98FF31D5B513A004F1964 /* Build configuration list for PBXNativeTarget "猫鼬鼠报天气" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FA98FF41D5B513A004F1964 /* Debug */,

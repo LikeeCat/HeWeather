@@ -13,7 +13,6 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
 
     var cityList = [CityRealm]()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,6 +37,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
      
         for list in resultCityList{
           cityList.append(list.city)
+            print(list.city.cityName)
         }
         
     }
@@ -59,7 +59,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
     }
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         var index = (viewController as! WeatherViewController).index
-        if index == 0 {
+        if index < 0 {
             return nil
         }
         else{
@@ -96,7 +96,6 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
                     VC.cityIdDefult = cityList[index].id
                     VC.cityName = cityList[index].cityName
                     VC.index = index
-                    print(index)
                     VC.pages = cityList.count
                   
                    contentVC = VC
@@ -107,12 +106,17 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
     }
     
     @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
+        cityList.removeAll()
+        self.setSubViewController()
+        
         if unwindSegue.identifier == "backHome"
         {
+          
             let SVC = unwindSegue.sourceViewController as!AddCityViewController
+            
             let selectCity = SVC.citySelect
-            cityList.removeAll()
-            self.setSubViewController()
+            
+            
             let index = searchCityIndex(selectCity)
             if let jumpIndex =  viewControllerAtIndex(index)
             {
@@ -139,9 +143,9 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource {
       
         let index = Int(cityList.indexOf(city)!)
  
+          print(index)
           return index
     }
-    
 
 
 

@@ -42,6 +42,7 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
     @IBOutlet weak private var weekday4: UILabel!
     @IBOutlet weak private var weekday5: UILabel!
     
+    @IBOutlet weak var locationLeading: NSLayoutConstraint!
     //MARK: UI Control
     @IBOutlet weak private var Spinner: UIActivityIndicatorView!
     @IBOutlet weak private var location: UILabel!
@@ -72,6 +73,7 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
         {
             self.setNowWeather()
             self.mapWeatherInformation()
+            
         }
     }
     
@@ -112,7 +114,7 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
     //MARK: ViewController life
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         self.tableview.estimatedRowHeight = 50
         self.tableview.rowHeight = UITableViewAutomaticDimension
         self.MapJSONAnalyze()
@@ -123,14 +125,16 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
         
         self.initializeRealmDataBase()
         self.Spinner.hidden = true
-//        print(realm.configuration.fileURL)
+        print(realm.configuration.fileURL)
         if islocation{
-            self.location.text = "正在解析当前地址,请稍侯"
+            self.location.text = "正在获取,请稍后"
             self.Spinner.hidden = false
             self.Spinner.startAnimating()
             
         }else{
             location.text = cityName
+            self.Spinner.hidden = false
+            self.Spinner.startAnimating()
         }
         self.managerImageAndLabel()
         
@@ -138,7 +142,6 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
         self.pageControl.numberOfPages = pages
         self.pageControl.currentPage = index
     
-        
          }
         
         override func viewDidAppear(animated: Bool) {
@@ -146,7 +149,7 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
         
         getInformation(cityIdDefult)
         
-    }
+        }
     
     
     //MARK: - Realm DataBase
@@ -280,7 +283,8 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
         UILabelData.map
         {
             label in
-            label.text = weekWeather[i].cond?.txt_n
+            var weatherTmp = isDay ? weekWeather[i].cond?.txt_d : weekWeather[i].cond?.txt_n
+            label.text = weatherTmp
             i += 1
         }
         let weekArray =   DateOperation.operation.setWeekday(nowTime)
@@ -307,20 +311,20 @@ class WeatherViewController: UIViewController,UITableViewDataSource {
         {
             isDay = true
             
-        
-          let imageName = switchParam(Int(weekWeather[0].cond!.code_d)!, isDay: isDay)
-            
-            self.background.image = UIImage(named: imageName)
-            self.NowWeatherWind.text = (weekWeather[0].cond?.txt_d)!
-            
         }
-        else
-        {
-        self.NowWeatherWind.text = weekWeather[0].cond?.txt_n
-         let imageName = switchParam(Int(weekWeather[0].cond!.code_d)!, isDay: isDay)
+
+        let imageName = switchParam(Int(weekWeather[0].cond!.code_d)!, isDay: isDay)
+
+        UIView.animateWithDuration(0.3, animations: {
+            
+           var weatherWindText = isDay ? self.weekWeather[0].cond?.txt_d :self.weekWeather[0].cond?.txt_n
+            self.NowWeatherWind.text = weatherWindText
             self.background.image = UIImage(named: imageName)
-        
-        }
+            self.Spinner.stopAnimating()
+            self.locationLeading.constant = -30
+            self.Spinner.hidden = true
+            })
+
     }
     
     func mapWeatherInformation()
